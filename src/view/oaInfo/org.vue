@@ -39,17 +39,17 @@
   </div>
 </template>
 <script>
-import { getAllOrg, queryOrgByName, syncOrg } from "@/api/szbank";
-import "./index.less";
+import { getAllOrg, queryOrgByName, syncOrg } from '@/api/szbank'
+import './index.less'
 export default {
   name: 'org',
-  data() {
+  data () {
     return {
       page: {
         index: 1,
         size: 10,
         total: 50,
-        opts: [10, 20, 50, 100],
+        opts: [10, 20, 50, 100]
       },
       total: 0,
       columns: [
@@ -59,116 +59,116 @@ export default {
         //   align: "center",
         // },
         {
-          title: "部门编码",
-          key: "orgNo",
+          title: '部门编码',
+          key: 'orgNo'
         },
         {
-          title: "部门名称",
-          key: "orgName",
-        },
-        {
-          title: "负责岗位",
-          key: "mstationName",
-        },
+          title: '部门名称',
+          key: 'orgName'
+        }
+        // {
+        //   title: "负责岗位",
+        //   key: "mstationName",
+        // },
       ],
       orgData: [],
       AllOrgData: [],
       value: [],
-      searchKey: "",
-      searchValue: "",
-    };
+      searchKey: '',
+      searchValue: ''
+    }
   },
 
-  created() {
-    this.queryAllOrg();
+  created () {
+    this.queryAllOrg()
   },
 
   methods: {
-    queryAllOrg() {
+    queryAllOrg () {
       getAllOrg().then((res) => {
-        if (res.status == "200") {
-          this.page.total = res.data.length;
+        if (res.status == '200') {
+          this.page.total = res.data.length
           this.AllOrgData = res.data.map((item) => {
             return {
               orgNo: item.orgNo,
-              mstationName: item.mstationName,
-              orgName: item.orgName,
-            };
-          });
-          var _start = (this.page.index - 1) * this.page.size;
-          var _end = this.page.index * this.page.size;
-          this.orgData = this.AllOrgData.slice(_start, _end);
-        }
-      });
-    },
-
-    handleSelectAll(status) {
-      this.$refs.selection.selectAll(status);
-    },
-
-    pIndexChange(i) {
-      this.page.index = i;
-      var _start = (this.page.index - 1) * this.page.size;
-      var _end = this.page.index * this.page.size;
-      this.orgData = this.AllOrgData.slice(_start, _end);
-    },
-
-    pSizeChange(s) {
-      this.page.size = s;
-      var _start = (this.page.index - 1) * this.page.size;
-      var _end = this.page.index * this.page.size;
-      this.orgData = this.AllOrgData.slice(_start, _end);
-    },
-
-    setDefaultSearchKey() {
-      this.searchKey =
-        this.columns[0].key !== "stationName"
-          ? this.columns[0].key
-          : this.columns.length > 1
-          ? this.columns[1].key
-          : "";
-    },
-
-    handleSearch() {
-      var orgName = this.searchValue;
-      queryOrgByName(orgName).then((res) => {
-        if (res.status == "200") {
-          this.page.total = res.data.length;
-          this.AllOrgData = res.data.map((item) => {
-            return {
-              orgNo: item.orgNo,
-              mstationName: item.mstationName,
-              orgName: item.orgName,
-            };
-          });
-          var _start = (this.page.index - 1) * this.page.size;
-          var _end = this.page.index * this.page.size;
-          this.orgData = this.AllOrgData.slice(_start, _end);
-        }
-      });
-    },
-
-    sync(){
-      syncOrg().then((res) => {
-        if(res.status == '200'){
-          return;
+              // mstationName: item.mstationName,
+              orgName: item.orgName
+            }
+          })
+          var _start = (this.page.index - 1) * this.page.size
+          var _end = this.page.index * this.page.size
+          this.orgData = this.AllOrgData.slice(_start, _end)
         }
       })
     },
 
-    handleClear(e) {
-      if (e.target.value === "") this.insideTableData = this.value;
+    handleSelectAll (status) {
+      this.$refs.selection.selectAll(status)
     },
+
+    pIndexChange (i) {
+      this.page.index = i
+      var _start = (this.page.index - 1) * this.page.size
+      var _end = this.page.index * this.page.size
+      this.orgData = this.AllOrgData.slice(_start, _end)
+    },
+
+    pSizeChange (s) {
+      this.page.size = s
+      var _start = (this.page.index - 1) * this.page.size
+      var _end = this.page.index * this.page.size
+      this.orgData = this.AllOrgData.slice(_start, _end)
+    },
+
+    setDefaultSearchKey () {
+      this.searchKey =
+        this.columns[0].key !== 'stationName'
+          ? this.columns[0].key
+          : this.columns.length > 1
+            ? this.columns[1].key
+            : ''
+    },
+
+    handleSearch () {
+      var orgName = this.searchValue
+      queryOrgByName(orgName).then((res) => {
+        if (res.status == '200') {
+          this.page.total = res.data.length
+          this.AllOrgData = res.data.map((item) => {
+            return {
+              orgNo: item.orgNo,
+              // mstationName: item.mstationName,
+              orgName: item.orgName
+            }
+          })
+          var _start = (this.page.index - 1) * this.page.size
+          var _end = this.page.index * this.page.size
+          this.orgData = this.AllOrgData.slice(_start, _end)
+        }
+      })
+    },
+
+    sync () {
+      syncOrg().then((res) => {
+        if (res.status == '200') {
+
+        }
+      })
+    },
+
+    handleClear (e) {
+      if (e.target.value === '') this.insideTableData = this.value
+    }
   },
 
   watch: {
-    value(val) {
-      this.handleSearch();
-    },
+    value (val) {
+      this.handleSearch()
+    }
   },
 
-  mounted() {
-    this.setDefaultSearchKey();
-  },
-};
+  mounted () {
+    this.setDefaultSearchKey()
+  }
+}
 </script>

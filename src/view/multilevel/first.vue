@@ -41,38 +41,39 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
-import store from "@/store";
+import { mapActions } from 'vuex'
+import store from '@/store'
 export default {
   name: 'first',
-  data() {
+  data () {
     return {
-      prefix: "http://119.45.200.52:9099/publish/",
-      //prefix: "http://155.103.100.215:9099/publish/",
-      list: [],
-    };
+      // prefix: "http://119.45.200.52:9099/publish/",
+      prefix: 'http://155.103.100.215:9098/publish/',
+      // prefix: "http://155.103.100.215:9099/publish/",
+      list: []
+    }
   },
-  mounted() {
-    this.getData();
+  mounted () {
+    this.getData()
   },
   methods: {
-    ...mapActions(["getListData"]),
+    ...mapActions(['getListData']),
 
-    getData() {
-      var userName = store.state.user.userName;
+    getData () {
+      var userName = store.state.user.userName
       this.getListData({ userName }).then((res) => {
         if (res.status === 200) {
           this.list = res.data.map((item) => {
             return {
               name: item.name,
-              publish_id: item.publish_id,
-            };
-          });
+              publish_id: item.publish_id
+            }
+          })
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 .task-first {

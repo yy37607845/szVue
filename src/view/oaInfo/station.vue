@@ -29,17 +29,17 @@
   </div>
 </template>
 <script>
-import { getAllStation, queryStationByName, syncStation} from "@/api/szbank";
+import { getAllStation, queryStationByName, syncStation} from '@/api/szbank'
 import './index.less'
 export default {
   name: 'station',
-  data() {
+  data () {
     return {
       page: {
         index: 1,
         size: 10,
         total: 50,
-        opts: [10,20,50,100]
+        opts: [10, 20, 50, 100]
       },
       total: 0,
       columns: [
@@ -49,60 +49,66 @@ export default {
         //   align: "center",
         // },
         {
-          title: "职位",
-          key: "stationName",
+          title: '编码',
+          key: 'stationCode'
         },
         {
-          title: "所属部门",
-          key: "orgName",
-        },
+          title: '职位',
+          key: 'stationName'
+        }
+        // {
+        //   title: "所属部门",
+        //   key: "orgName",
+        // },
       ],
       userData: [
       ],
-      AllStationData:[],
+      AllStationData: [],
       value: [],
       searchKey: '',
       searchValue: ''
-    };
+    }
   },
 
-  created() {
-    this.queryAllStation();
+  created () {
+    this.queryAllStation()
   },
 
   methods: {
-    queryAllStation() {
+    queryAllStation () {
       getAllStation().then((res) => {
-        if(res.status == "200"){
+        if (res.status == '200') {
           this.page.total = res.data.length
           this.AllStationData = res.data.map((item) => {
             return {
-            stationName: item.stationName,
-            orgName: item.orgName,}
+              stationCode: item.code,
+              stationName: item.stationName
+            // orgName: item.orgName,
+            }
           })
-          var _start = (this.page.index - 1)* this.page.size;
-          var _end = this.page.index * this.page.size;
-          this.userData = this.AllStationData.slice(_start, _end);
+          var _start = (this.page.index - 1) * this.page.size
+          var _end = this.page.index * this.page.size
+          this.userData = this.AllStationData.slice(_start, _end)
         }
-      });
+      })
     },
 
-    handleSelectAll(status) {
-      this.$refs.selection.selectAll(status);
+    handleSelectAll (status) {
+      this.$refs.selection.selectAll(status)
     },
 
-    pIndexChange(i) {
-      this.page.index = i;
-      var _start = (this.page.index - 1)* this.page.size;
-          var _end = this.page.index * this.page.size;
-          this.userData = this.AllStationData.slice(_start, _end);
+    pIndexChange (i) {
+      this.page.index = i
+      var _start = (this.page.index - 1) * this.page.size
+      var _end = this.page.index * this.page.size
+      this.userData = this.AllStationData.slice(_start, _end)
     },
 
-    pSizeChange(s) {
-      this.page.size = s;
-      var _start = (this.page.index - 1)* this.page.size;
-          var _end = this.page.index * this.page.size;
-          this.userData = this.AllStationData.slice(_start, _end);
+    pSizeChange (s) {
+      this.page.size = s
+      var _start = (this.page.index - 1) * this.page.size
+      var _end = this.page.index * this.page.size
+      this.userData = this.AllStationData.slice(_start, _end)
     },
 
     setDefaultSearchKey () {
@@ -110,44 +116,46 @@ export default {
     },
 
     handleSearch () {
-      var stationName = this.searchValue;
+      var stationName = this.searchValue
       queryStationByName(stationName).then((res) => {
-        if(res.status == "200"){
+        if (res.status == '200') {
           this.page.total = res.data.length
           this.AllStationData = res.data.map((item) => {
             return {
-            stationName: item.stationName,
-            orgName: item.orgName,}
+              stationCode: item.code,
+              stationName: item.stationName
+            // orgName: item.orgName,
+            }
           })
-          var _start = (this.page.index - 1)* this.page.size;
-          var _end = this.page.index * this.page.size;
-          this.userData = this.AllStationData.slice(_start, _end);
+          var _start = (this.page.index - 1) * this.page.size
+          var _end = this.page.index * this.page.size
+          this.userData = this.AllStationData.slice(_start, _end)
         }
-      });
-          //this.insideTableData = this.value.filter(item => item[this.searchKey].indexOf(this.searchValue) > -1)
-        },
+      })
+      // this.insideTableData = this.value.filter(item => item[this.searchKey].indexOf(this.searchValue) > -1)
+    },
 
-    sync(){
+    sync () {
       syncStation().then((res) => {
-        if(res.status == '200'){
-          return;
+        if (res.status == '200') {
+
         }
       })
     },
 
     handleClear (e) {
       if (e.target.value === '') this.insideTableData = this.value
-    },
+    }
   },
 
   watch: {
-    value(val) {
+    value (val) {
       this.handleSearch()
     }
   },
 
-  mounted(){
+  mounted () {
     this.setDefaultSearchKey()
   }
-};
+}
 </script>

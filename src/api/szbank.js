@@ -1,25 +1,25 @@
 import axios from '@/libs/api.request'
 
 export const getDpData = (userName) => {
-    const data = {
-      userName
-    }
-    return axios.request({
-      url: '/permission/getArtByPermission',
-      data,
-      method: 'post'
-    })
+  const data = {
+    userName
   }
+  return axios.request({
+    url: '/permission/getArtByPermission',
+    data,
+    method: 'post'
+  })
+}
 
-//获取所有人员信息
-export const getAllUserInfo = ()=>{
+// 获取所有人员信息
+export const getAllUserInfo = () => {
   return axios.request({
     url: '/permission/users/getAllUserInfo',
     method: 'get'
   })
 }
-//分页查询人员信息
-export const queryUserByPage = ({pageNo, pageSize})=>{
+// 分页查询人员信息
+export const queryUserByPage = ({pageNo, pageSize}) => {
   const data = {
     pageNo,
     pageSize
@@ -30,15 +30,15 @@ export const queryUserByPage = ({pageNo, pageSize})=>{
     method: 'post'
   })
 }
-//获取所有组织信息
-export const getAllOrg = ()=>{
+// 获取所有组织信息
+export const getAllOrg = () => {
   return axios.request({
     url: '/permission/org/getAllOrg',
     method: 'get'
   })
 }
 
-//获取所有岗位信息
+// 获取所有岗位信息
 export const getAllStation = () => {
   return axios.request({
     url: '/permission/station/getAllStation',
@@ -46,7 +46,7 @@ export const getAllStation = () => {
   })
 }
 
-//根据用户id或者用户名搜索人员信息
+// 根据用户id或者用户名搜索人员信息
 export const queryUserByUserId = (userId) => {
   const data = {
     userId
@@ -58,15 +58,16 @@ export const queryUserByUserId = (userId) => {
   })
 }
 
-//同步人员信息
+// 同步人员信息
 export const syncPerson = () => {
   return axios.request({
-    url: '/permission/OASystem/syncUser',
+    // url: '/permission/OASystem/syncUser',
+    url: '/permission/test/syncUser',
     method: 'post'
   })
 }
 
-//根据组织id或者组织名搜索组织
+// 根据组织id或者组织名搜索组织
 export const queryOrgByName = (orgName) => {
   const data = {
     orgName
@@ -78,15 +79,16 @@ export const queryOrgByName = (orgName) => {
   })
 }
 
-//同步组织信息
+// 同步组织信息
 export const syncOrg = () => {
   return axios.request({
-    url: '/permission/OASystem/syncOrg',
+    // url: '/permission/OASystem/syncOrg',
+    url: '/permission/test/syncOrg',
     method: 'post'
   })
 }
 
-//根据职位名称搜索
+// 根据职位名称搜索
 export const queryStationByName = (stationName) => {
   const data = {
     stationName
@@ -98,26 +100,27 @@ export const queryStationByName = (stationName) => {
   })
 }
 
-//同步职位信息
+// 同步职位信息
 export const syncStation = () => {
   return axios.request({
-    url: '/permission/OASystem/syncStation',
+    // url: '/permission/OASystem/syncStation',
+    url: '/permission/test/syncStation',
     method: 'post'
   })
 }
 
-//获取项目信息
+// 获取项目信息
 export const getAllProject = () => {
   return axios.request({
     url: '/permission/settings/getAllProject',
     method: 'get'
   })
-} 
+}
 
-//新增 or 更新项目
+// 新增 or 更新项目
 export const insertOrUpdateProject = (id, name, description) => {
-  //不传主键id值时 新增项目
-  if(id == ''){
+  // 不传主键id值时 新增项目
+  if (id == '') {
     const data = {
       name,
       description
@@ -127,7 +130,7 @@ export const insertOrUpdateProject = (id, name, description) => {
       data,
       method: 'post'
     })
-  }else{
+  } else {
     const data = {
       id,
       name,
@@ -141,8 +144,8 @@ export const insertOrUpdateProject = (id, name, description) => {
   }
 }
 
-//更新项目 关联部门
-export const updateRelatedOrg = (projectId,orgArr) =>{
+// 更新项目 关联部门
+export const updateRelatedOrg = (projectId, orgArr) => {
   const data = {
     projectId,
     orgArr
@@ -154,7 +157,7 @@ export const updateRelatedOrg = (projectId,orgArr) =>{
   })
 }
 
-//根据项目名称搜索项目
+// 根据项目名称搜索项目
 export const queryProjectByName = (projectName) => {
   const data = {
     projectName
@@ -166,7 +169,7 @@ export const queryProjectByName = (projectName) => {
   })
 }
 
-//删除项目
+// 删除项目
 export const delProjectById = (id) => {
   const data = {
     id
@@ -178,7 +181,7 @@ export const delProjectById = (id) => {
   })
 }
 
-//获取所有发布大屏
+// 获取所有发布大屏
 export const getAllArtOnline = () => {
   return axios.request({
     url: '/permission/settings/getAllArtOnline',
@@ -186,7 +189,7 @@ export const getAllArtOnline = () => {
   })
 }
 
-//根据大屏名称搜索
+// 根据大屏名称搜索
 export const queryArtByName = (name) => {
   const data = {name}
   return axios.request({
@@ -196,7 +199,7 @@ export const queryArtByName = (name) => {
   })
 }
 
-//新增大屏
+// 新增大屏
 export const insertArt = (artId) => {
   const data = {artId}
   return axios.request({
@@ -206,7 +209,7 @@ export const insertArt = (artId) => {
   })
 }
 
-//修改大屏名称
+// 修改大屏名称
 export const updateArtNameById = (artId, name) => {
   const data = {
     artId,
@@ -219,7 +222,7 @@ export const updateArtNameById = (artId, name) => {
   })
 }
 
-//删除大屏
+// 删除大屏
 export const deleteArtById = (artId) => {
   const data = {artId}
   return axios.request({
@@ -229,7 +232,7 @@ export const deleteArtById = (artId) => {
   })
 }
 
-//获取级联 已上线大屏
+// 获取级联 已上线大屏
 export const getOnlineArt = () => {
   return axios.request({
     url: '/permission/settings/getOnlineArt',
@@ -237,7 +240,7 @@ export const getOnlineArt = () => {
   })
 }
 
-//大屏管理获取所有项目列表
+// 大屏管理获取所有项目列表
 export const getSelectProject = () => {
   return axios.request({
     url: '/permission/settings/getSelectProject',
@@ -245,7 +248,7 @@ export const getSelectProject = () => {
   })
 }
 
-//大屏关联项目
+// 大屏关联项目
 export const artRelProject = (artId, projectIds) => {
   const data = {
     artId,
@@ -258,7 +261,7 @@ export const artRelProject = (artId, projectIds) => {
   })
 }
 
-//大屏获取职位树
+// 大屏获取职位树
 export const getStationTree = (artId) => {
   const data = {artId}
   return axios.request({
@@ -268,7 +271,17 @@ export const getStationTree = (artId) => {
   })
 }
 
-//大屏获取所有职位
+// 新OA大屏获取职位
+export const getNewOAStationPermission = (artId) => {
+  const data = {artId}
+  return axios.request({
+    url: '/permission/settings/getNewStationPermission',
+    data,
+    method: 'post'
+  })
+}
+
+// 大屏获取所有职位
 export const getAllStationSome = () => {
   return axios.request({
     url: '/permission/station/getAllStationSome',
@@ -276,7 +289,15 @@ export const getAllStationSome = () => {
   })
 }
 
-//大屏设置权限
+// 新OA 大屏获取职位
+export const getNewAllStation = () => {
+  return axios.request({
+    url: '/permission/station/getNewAllStation',
+    method: 'get'
+  })
+}
+
+// 大屏设置权限
 export const setPermission = (artId, stationArr) => {
   const data = {
     artId,
@@ -289,7 +310,7 @@ export const setPermission = (artId, stationArr) => {
   })
 }
 
-//获取个人项目列表
+// 获取个人项目列表
 export const getPersonProjectList = (orgId, userId) => {
   const data = {orgId, userId}
   return axios.request({
@@ -299,9 +320,9 @@ export const getPersonProjectList = (orgId, userId) => {
   })
 }
 
-//根据个人项目获取有权限的大屏
-export const getAllScreenByProjectId = (projectId) => {
-  const data = {projectId}
+// 根据个人项目获取有权限的大屏
+export const getAllScreenByProjectId = (projectId, stationId) => {
+  const data = {projectId, stationId}
   return axios.request({
     url: '/permission/screen/getArtTableByProjectId',
     data,
